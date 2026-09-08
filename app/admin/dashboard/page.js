@@ -28,13 +28,6 @@ export default function Dashboard() {
           <h1>Dashboard</h1>
         </div>
 
-        <div className="adminUser">
-          <div className="userCircle">A</div>
-          <div>
-            <strong>Administrador</strong>
-            <small>Panel administrativo</small>
-          </div>
-        </div>
       </div>
 
       <div className="dashboardCards">

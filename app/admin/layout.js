@@ -12,7 +12,7 @@ export default function AdminLayout({ children }) {
           <Link href="/admin/dashboard">Dashboard</Link>
           <Link href="/admin/reportes">Bandeja de reportes</Link>
           <Link href="/admin/estadisticas">Estadísticas y analítica</Link>
-          <Link href="/admin/usuarios">Usuarios</Link>
+          <Link href="/admin/accesos">Administración de accesos</Link>
         </nav>
 
         <Link href="/" className="adminLogout">

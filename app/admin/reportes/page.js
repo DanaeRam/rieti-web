@@ -61,14 +61,6 @@ export default function Reportes() {
           <span>RIETI · ADMINISTRACIÓN</span>
           <h1>Bandeja de reportes</h1>
         </div>
-
-        <div className="adminUser">
-          <div className="userCircle">A</div>
-          <div>
-            <strong>Administrador</strong>
-            <small>Panel administrativo</small>
-          </div>
-        </div>
       </div>
 
       <div className="dashboardCards">
