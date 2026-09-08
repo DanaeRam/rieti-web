@@ -1,26 +1,224 @@
-@import "tailwindcss";
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+/* PALETA DE COLORES */
+  --rieti-purple: #3E3869;
+  --rieti-purple-dark: #302A58;
+  --rieti-purple-light: #A98CB0;
+
+  --rieti-pink: #D16C9A;
+  --rieti-blue: #496A9F;
+  --rieti-turquoise: #55AFC1;
+
+  --white: #ffffff;
+  --text: #29263D;
+
+  --radius-large: 32px;
+  --radius-button: 999px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--white);
+  color: var(--text);
+
+  font-family:
+    "Segoe UI",
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+.rietiPage {
+  min-height: 100vh;
+  width: 100%;
+  background: var(--white);
+}
+
+.mainHeader {
+  width: 100%;
+  background: var(--white);
+  padding: 14px 40px;
+}
+
+.headerContent {
+  width: 100%;
+  max-width: 1450px;
+  min-height: 58px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo img {
+  display: block;
+  width: 115px;
+  height: auto;
+  object-fit: contain;
+}
+
+
+.adminButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 22px;
+  border: 2px solid var(--rieti-purple);
+  border-radius: var(--radius-button);
+  background: var(--white);
+  color: var(--rieti-purple);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.adminButton:hover {
+  background: var(--rieti-purple);
+  color: var(--white);
+
+  transform: translateY(-2px);
+}
+
+.heroSection {
+  position: relative;
+  width: calc(100% - 30px);
+  min-height: calc(100% - 16px);
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-large);
+  background-image: url("/hero-rieti.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.heroOverlay {
+  width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 86px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(48, 42, 88, 0.08);
+}
+
+.heroButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px;
+  transform: translateY(150px);
+}
+
+.heroButton {
+  min-width: 190px;
+  padding: 16px 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-button);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 800;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.primaryButton {
+  background: var(--rieti-purple);
+  color: var(--white);
+  border: 2px solid var(--rieti-purple);
+  box-shadow:
+    0 8px 25px rgba(48, 42, 88, 0.25);
+}
+
+.secondaryButton {
+  background: var(--white);
+  color: var(--rieti-purple);
+  border: 2px solid var(--white);
+  box-shadow:
+    0 8px 25px rgba(48, 42, 88, 0.20);
+}
+
+
+.heroButton:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 14px 30px rgba(48, 42, 88, 0.30);
+}
+
+
+.primaryButton:hover {
+  background: var(--rieti-purple-dark);
+  border-color: var(--rieti-purple-dark);
+}
+
+
+.secondaryButton:hover {
+  background: #f4f2f8;
+}
+
+.sipinnaSection {
+  width: 100%;
+  padding: 65px 30px;
+
+  background: linear-gradient(
+    135deg,
+    #302a58 0%,
+    #3E3869 55%,
+    #496A9F 100%
+  );
+}
+
+.sipinnaContent {
+  max-width: 900px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.sipinnaLogo {
+  width: 190px;
+  height: auto;
+  object-fit: contain;
+}
+
+.sipinnaContent p {
+  max-width: 600px;
+  margin: 20px 0 0;
+
+  color: #ffffff;
+
+  font-size: 14px;
+  line-height: 1.7;
 }
