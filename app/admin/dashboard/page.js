@@ -1,267 +1,130 @@
 "use client";
 
 import {
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
+  CartesianGrid,
   Tooltip,
-  PieChart,
-  Pie,
-  Cell
+  ResponsiveContainer,
 } from "recharts";
 
-const reportes = [
-  { month: "Ene", reports: 18 },
-  { month: "Feb", reports: 25 },
-  { month: "Mar", reports: 31 },
-  { month: "Abr", reports: 28 },
-  { month: "May", reports: 42 },
-  { month: "Jun", reports: 37 }
+const datos = [
+  { mes: "Ene", reportes: 18 },
+  { mes: "Feb", reportes: 24 },
+  { mes: "Mar", reportes: 31 },
+  { mes: "Abr", reportes: 28 },
+  { mes: "May", reportes: 42 },
+  { mes: "Jun", reportes: 37 },
 ];
 
-const municipios = [
-  { name: "Atizapán", reports: 42 },
-  { name: "Tlalnepantla", reports: 31 },
-  { name: "Naucalpan", reports: 25 },
-  { name: "Cuautitlán", reports: 19 },
-  { name: "Otros", reports: 15 }
-];
-
-const estado = [
-  { name: "En revisión", value: 42 },
-  { name: "En proceso", value: 31 },
-  { name: "Atendidos", value: 27 }
-];
-
-const colors = [
-  "#D16C9A",
-  "#496A9F",
-  "#55AFC1"
-];
-
-export default function AdminDashboard() {
+export default function Dashboard() {
   return (
-    <div className="dashboard">
-
-      <header className="adminTopbar">
+    <div className="adminPage">
+      <div className="adminTopbar">
         <div>
           <span>RIETI · ADMINISTRACIÓN</span>
           <h1>Dashboard</h1>
         </div>
-      </header>
 
-      <section className="dashboardCards">
+        <div className="adminUser">
+          <div className="userCircle">A</div>
+          <div>
+            <strong>Administrador</strong>
+            <small>Panel administrativo</small>
+          </div>
+        </div>
+      </div>
 
-        <div className="dashboardCard cardPurple">
+      <div className="dashboardCards">
+        <article className="dashboardCard cardPurple">
           <span>REPORTES RECIBIDOS</span>
           <strong>174</strong>
           <small>+12% este mes</small>
-        </div>
+        </article>
 
-        <div className="dashboardCard cardPink">
+        <article className="dashboardCard cardPink">
           <span>EN REVISIÓN</span>
           <strong>42</strong>
           <small>Reportes pendientes</small>
-        </div>
+        </article>
 
-        <div className="dashboardCard cardBlue">
+        <article className="dashboardCard cardBlue">
           <span>EN PROCESO</span>
-          <strong>31</strong>
-          <small>Casos activos</small>
-        </div>
+          <strong>28</strong>
+          <small>Casos canalizados</small>
+        </article>
 
-        <div className="dashboardCard cardTurquoise">
+        <article className="dashboardCard cardTurquoise">
           <span>ATENDIDOS</span>
-          <strong>101</strong>
-          <small>Casos gestionados</small>
-        </div>
+          <strong>104</strong>
+          <small>Casos concluidos</small>
+        </article>
+      </div>
 
-      </section>
-
-      <section className="dashboardGrid">
-
-        <div className="dashboardPanel">
-
-          <div className="panelHeader">
-            <div>
-              <span>ACTIVIDAD</span>
-              <h2>Reportes recibidos</h2>
-            </div>
-
-            <select>
-                <option>Último mes</option>
-                <option>Últimos 6 meses</option>
-            </select>
+      <div className="dashboardPanel">
+        <div className="panelHeader">
+          <div>
+            <span>ACTIVIDAD</span>
+            <h2>Reportes recibidos</h2>
           </div>
 
-          <ResponsiveContainer width="100%" height={280}>
-            <AreaChart data={reportes}>
-              <XAxis dataKey="month" />
+          <select>
+            <option>Últimos 6 meses</option>
+            <option>Este año</option>
+          </select>
+        </div>
+
+        <div className="chart">
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={datos}>
+              <CartesianGrid stroke="#eeeaf2" />
+              <XAxis dataKey="mes" />
               <YAxis />
               <Tooltip />
-
-              <Area
+              <Line
                 type="monotone"
-                dataKey="reports"
+                dataKey="reportes"
                 stroke="#3E3869"
-                fill="#A98CB0"
-                fillOpacity={0.35}
+                strokeWidth={3}
+                dot={{ r: 4 }}
               />
-            </AreaChart>
+            </LineChart>
           </ResponsiveContainer>
-
         </div>
+      </div>
 
-        <div className="dashboardPanel">
-
-          <div className="panelHeader">
-            <div>
-              <span>DISTRIBUCIÓN</span>
-              <h2>Estado de reportes</h2>
-            </div>
-          </div>
-
-          <div className="pieContainer">
-
-            <ResponsiveContainer width="100%" height={220}>
-              <PieChart>
-
-                <Pie
-                  data={estado}
-                  dataKey="value"
-                  nameKey="name"
-                  innerRadius={55}
-                  outerRadius={82}
-                >
-                  {estado.map((item, index) => (
-                    <Cell
-                      key={item.name}
-                      fill={colors[index]}
-                    />
-                  ))}
-                </Pie>
-
-                <Tooltip />
-
-              </PieChart>
-            </ResponsiveContainer>
-
-            <div className="statusList">
-
-              {estado.map((item, index) => (
-                <div key={item.name}>
-
-                  <i
-                    style={{
-                      background: colors[index]
-                    }}
-                  />
-
-                  <span>{item.name}</span>
-
-                  <strong>{item.value}%</strong>
-
-                </div>
-              ))}
-
-            </div>
+      <div className="dashboardPanel">
+        <div className="panelHeader">
+          <div>
+            <span>COBERTURA</span>
+            <h2>Reportes por municipio</h2>
           </div>
         </div>
 
-        <div className="dashboardPanel">
-          <div className="panelHeader">
-
-            <div>
-              <span>COBERTURA</span>
-              <h2>Reportes por municipio</h2>
-            </div>
-
+        <div className="municipalityList">
+          <div>
+            <span>Atizapán de Zaragoza</span>
+            <strong>42</strong>
           </div>
 
-          <ResponsiveContainer width="100%" height={260}>
-            <BarChart data={municipios}>
-
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-
-              <Bar
-                dataKey="reports"
-                fill="#496A9F"
-                radius={[6, 6, 0, 0]}
-              />
-
-            </BarChart>
-          </ResponsiveContainer>
-
-        </div>
-
-        <div className="dashboardPanel">
-
-          <div className="panelHeader">
-
-            <div>
-              <span>SEGUIMIENTO</span>
-              <h2>Reportes recientes</h2>
-            </div>
-
-            <a href="/admin/reportes">
-              Ver todos
-            </a>
-
+          <div>
+            <span>Naucalpan</span>
+            <strong>31</strong>
           </div>
 
-          <div className="reportTable">
+          <div>
+            <span>Tlalnepantla</span>
+            <strong>25</strong>
+          </div>
 
-            <div className="tableRow tableHead">
-              <span>Folio</span>
-              <span>Municipio</span>
-              <span>Fecha</span>
-              <span>Estado</span>
-            </div>
-
-            <div className="tableRow">
-              <span>RIETI-ATZ-00123</span>
-              <span>Atizapán</span>
-              <span>06/09/2026</span>
-              <b className="statusReview">
-                En revisión
-              </b>
-            </div>
-
-            <div className="tableRow">
-              <span>RIETI-TLN-00122</span>
-              <span>Tlalnepantla</span>
-              <span>05/09/2026</span>
-              <b className="statusProcess">
-                En proceso
-              </b>
-            </div>
-
-            <div className="tableRow">
-              <span>RIETI-NCL-00121</span>
-              <span>Naucalpan</span>
-              <span>04/09/2026</span>
-              <b className="statusDone">
-                Atendido
-              </b>
-            </div>
-
-            <div className="tableRow">
-              <span>RIETI-ATZ-00120</span>
-              <span>Atizapán</span>
-              <span>03/09/2026</span>
-              <b className="statusReview">
-                En revisión
-              </b>
-            </div>
+          <div>
+            <span>Cuautitlán Izcalli</span>
+            <strong>19</strong>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

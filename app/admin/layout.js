@@ -3,9 +3,7 @@ import Link from "next/link";
 export default function AdminLayout({ children }) {
   return (
     <div className="adminLayout">
-
       <aside className="adminSidebar">
-
         <Link href="/admin/dashboard" className="adminLogo">
           <img src="/logo-rieti.png" alt="RIETI" />
         </Link>
@@ -20,13 +18,11 @@ export default function AdminLayout({ children }) {
         <Link href="/" className="adminLogout">
           Cerrar sesión
         </Link>
-
       </aside>
 
-      <main className="adminMain">
+      <main className="adminContent">
         {children}
       </main>
-
     </div>
   );
 }
