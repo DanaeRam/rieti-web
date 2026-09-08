@@ -13,7 +13,7 @@ export default function Home() {
           </Link>
 
           <Link
-            href="/admin/login"
+            href="/login"
             className="adminButton">
             Acceso Admin
           </Link>
