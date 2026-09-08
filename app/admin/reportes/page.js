@@ -59,7 +59,7 @@ export default function Reportes() {
       <div className="adminTopbar">
         <div>
           <span>RIETI · ADMINISTRACIÓN</span>
-          <h1>Reportes</h1>
+          <h1>Bandeja de reportes</h1>
         </div>
 
         <div className="adminUser">

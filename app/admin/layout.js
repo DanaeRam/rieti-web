@@ -10,8 +10,8 @@ export default function AdminLayout({ children }) {
 
         <nav className="adminNav">
           <Link href="/admin/dashboard">Dashboard</Link>
-          <Link href="/admin/reportes">Reportes</Link>
-          <Link href="/admin/analitica">Analítica</Link>
+          <Link href="/admin/reportes">Bandeja de reportes</Link>
+          <Link href="/admin/estadisticas">Estadísticas y analítica</Link>
           <Link href="/admin/usuarios">Usuarios</Link>
         </nav>
 
