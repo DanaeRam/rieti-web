@@ -17,8 +17,12 @@
 }
 
 
-html {
-  scroll-behavior: smooth;
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  overflow-x: hidden;
 }
 
 body {
@@ -184,41 +188,152 @@ a {
   background: #f4f2f8;
 }
 
-.sipinnaSection {
-  width: 100%;
-  padding: 65px 30px;
+/* ESTILOS LOGIN */
 
-  background: linear-gradient(
-    135deg,
-    #302a58 0%,
-    #3E3869 55%,
-    #496A9F 100%
-  );
-}
-
-.sipinnaContent {
-  max-width: 900px;
+.loginSection {
+  width: min(1100px, 90%);
+  min-height: calc(100vh - 90px);
   margin: 0 auto;
 
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
 
-  text-align: center;
+  gap: 80px;
 }
 
-.sipinnaLogo {
-  width: 190px;
-  height: auto;
-  object-fit: contain;
+.loginInfo {
+  max-width: 500px;
 }
 
-.sipinnaContent p {
-  max-width: 600px;
-  margin: 20px 0 0;
+.loginInfo span {
+  color: var(--rieti-turquoise);
 
-  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.loginInfo h1 {
+  margin: 18px 0;
+
+  color: var(--rieti-purple);
+
+  font-size: clamp(48px, 6vw, 72px);
+  line-height: 0.95;
+  letter-spacing: -2px;
+  font-weight: 800;
+}
+
+.loginInfo p {
+  max-width: 450px;
+
+  margin: 0;
+
+  color: #6e6c79;
+
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 575px;
+
+  margin: 0 auto;
+
+  padding: 45px;
+
+  border-radius: var(--radius-large);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--rieti-purple-dark),
+      var(--rieti-purple)
+    );
+
+  box-shadow:
+    0 20px 45px rgba(48, 42, 88, 0.20);
+
+  color: var(--white);
+}
+
+.loginCard h2 {
+  margin: 0;
+
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.loginCard > p {
+  margin: 8px 0 30px;
+
+  color: #ddd9e9;
 
   font-size: 14px;
-  line-height: 1.7;
+}
+
+.loginCard form {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginCard label {
+  margin-bottom: 8px;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.loginCard input {
+  width: 94%;
+
+  margin-bottom: 20px;
+  padding: 15px 17px;
+
+  border: 2px solid transparent;
+  border-radius: 14px;
+
+  background: var(--white);
+  color: var(--text);
+
+  font-family: inherit;
+  font-size: 15px;
+
+  outline: none;
+}
+
+.loginCard input:focus {
+  border-color: var(--rieti-turquoise);
+}
+
+.loginButton {
+  width: 100%;
+
+  margin-top: 5px;
+  padding: 15px;
+
+  border: none;
+  border-radius: var(--radius-button);
+
+  background: var(--white);
+  color: var(--rieti-purple);
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.loginButton:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(20, 15, 50, 0.25);
 }
