@@ -2,8 +2,17 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const LocationMap = dynamic(
+  () => import("@/components/LocationMap"),
+  {
+    ssr: false
+  }
+);
 
 export default function Reporte() {
+  const [position, setPosition] = useState(null);
   const [paso, setPaso] = useState(1);
   const [enviado, setEnviado] = useState(false);
 
@@ -52,19 +61,15 @@ export default function Reporte() {
   const paso4Completo = riesgo;
 
   function obtenerUbicacion() {
-    if (!navigator.geolocation) {
-      setUbicacionManual(true);
-      return;
-    }
-
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setUbicacion(
-          `${position.coords.latitude.toFixed(6)}, ${position.coords.longitude.toFixed(6)}`
-        );
+      (pos) => {
+        setPosition([
+          pos.coords.latitude,
+          pos.coords.longitude
+        ]);
       },
       () => {
-        setUbicacionManual(true);
+        alert("No se pudo obtener tu ubicación.");
       }
     );
   }
@@ -555,62 +560,48 @@ export default function Reporte() {
 
               </div>
 
-              <div className="locationBox">
+<div className="locationBox">
 
-                <div className="locationIcon">⌖</div>
+  <div className="locationIcon">⌖</div>
 
-                <div className="locationText">
-                  <strong>Ubicación del reporte</strong>
+  <div className="locationText">
+    <strong>Ubicación del reporte</strong>
 
-                  <p>
-                    Puedes utilizar tu ubicación actual o colocar
-                    manualmente el punto en el mapa.
-                  </p>
-                </div>
+    <p>
+      Utiliza tu ubicación actual o selecciona manualmente
+      el punto donde observaste la situación.
+    </p>
+  </div>
 
-                <button
-                  type="button"
-                  className="locationButton"
-                  onClick={obtenerUbicacion}
-                >
-                  Usar mi ubicación
-                </button>
+  <button
+    type="button"
+    className="locationButton"
+    onClick={obtenerUbicacion}
+  >
+    Usar mi ubicación
+  </button>
 
-              </div>
+</div>
 
-              <div className="mapBox">
+<div className="mapBox">
 
-                <div className="mapPlaceholder">
-                  <span>📍</span>
+  <LocationMap
+    position={position}
+    setPosition={setPosition}
+  />
 
-                  <strong>
-                    Selecciona la ubicación en el mapa
-                  </strong>
+  <p className="mapHelp">
+    También puedes seleccionar manualmente el punto en el mapa.
+  </p>
 
-                  <small>
-                    Si el GPS no funciona, puedes colocar el marcador
-                    manualmente.
-                  </small>
+</div>
 
-                  <button
-                    type="button"
-                    className="mapButton"
-                    onClick={seleccionarUbicacionManual}
-                  >
-                    Colocar ubicación manualmente
-                  </button>
-                </div>
-
-              </div>
-
-              {ubicacion && (
-                <div className="locationResult">
-                  ✓ {ubicacionManual
-                    ? "Ubicación seleccionada manualmente"
-                    : `Ubicación obtenida: ${ubicacion}`}
-                </div>
-              )}
-
+{position && (
+  <div className="locationResult">
+    ✓ Ubicación seleccionada:{" "}
+    {position[0].toFixed(6)}, {position[1].toFixed(6)}
+  </div>
+)}
               <div className="evidenceSection">
 
                 <div className="evidenceTitle">
