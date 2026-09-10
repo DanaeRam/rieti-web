@@ -37,9 +37,6 @@ export default function AdminLogin() {
       <section className="loginSection">
 
         <div className="loginInfo">
-
-          <span>RIETI · ADMINISTRACIÓN</span>
-
           <h1>
             Acceso
             <br />
