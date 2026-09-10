@@ -15,14 +15,14 @@ const reportes = [
     municipio: "Atizapán de Zaragoza",
     fecha: "04/09/2026",
     tipo: "Trabajo infantil",
-    estado: "En proceso",
+    estado: "En seguimiento",
   },
   {
     folio: "RIETI-ATZ-2026-000125",
     municipio: "Atizapán de Zaragoza",
     fecha: "03/09/2026",
     tipo: "Posible explotación",
-    estado: "Atendido",
+    estado: "Canalizado",
   },
   {
     folio: "RIETI-ATZ-2026-000126",
@@ -36,7 +36,7 @@ const reportes = [
     municipio: "Atizapán de Zaragoza",
     fecha: "01/09/2026",
     tipo: "Trabajo infantil",
-    estado: "En proceso",
+    estado: "En seguimiento",
   },
 ];
 
@@ -77,13 +77,13 @@ export default function Reportes() {
         </article>
 
         <article className="dashboardCard cardBlue">
-          <span>EN PROCESO</span>
+          <span>EN SEGUIMIENTO</span>
           <strong>28</strong>
           <small>Casos canalizados</small>
         </article>
 
         <article className="dashboardCard cardTurquoise">
-          <span>ATENDIDOS</span>
+          <span>CONCLUIDOS</span>
           <strong>104</strong>
           <small>Casos concluidos</small>
         </article>
@@ -116,9 +116,15 @@ export default function Reportes() {
               onChange={(e) => setEstado(e.target.value)}
             >
               <option>Todos</option>
+              <option>Registrado</option>
               <option>En revisión</option>
-              <option>En proceso</option>
-              <option>Atendido</option>
+              <option>En seguimiento</option>
+              <option>Canalizado</option>
+              <option>Concluido</option>
+              <option>Archivado</option>
+              <option>Cancelado</option>
+              <option>Reincidente</option>
+            
             </select>
           </div>
 
@@ -166,7 +172,7 @@ export default function Reportes() {
                   className={
                     reporte.estado === "En revisión"
                       ? "statusReview"
-                      : reporte.estado === "En proceso"
+                      : reporte.estado === "En seguimiento"
                         ? "statusProcess"
                         : "statusDone"
                   }

@@ -94,12 +94,12 @@ export default function Estadisticas() {
             </div>
 
             <div>
-              <span>En proceso</span>
+              <span>En seguimiento</span>
               <strong>28</strong>
             </div>
 
             <div>
-              <span>Atendidos</span>
+              <span>Concluidos</span>
               <strong>104</strong>
             </div>
           </div>
