@@ -2,177 +2,177 @@
 
 import { useState } from "react";
 
+const municipios = Array.from(
+  { length: 16 },
+  (_, i) => `Municipio ${i + 1}`
+);
+
 const reportes = [
   {
-    folio: "RIETI-ATZ-2026-000123",
-    municipio: "Atizapán de Zaragoza",
-    fecha: "05/09/2026",
-    tipo: "Trabajo infantil",
-    estado: "En revisión",
+    folio: "RIETI-M1-2026-000123",
+    municipio: "Municipio 1",
+    estado: "Pendiente",
+    prioridad: "Alta",
+    fecha: "2026-09-05",
   },
   {
-    folio: "RIETI-ATZ-2026-000124",
-    municipio: "Atizapán de Zaragoza",
-    fecha: "04/09/2026",
-    tipo: "Trabajo infantil",
-    estado: "En seguimiento",
+    folio: "RIETI-M2-2026-000124",
+    municipio: "Municipio 2",
+    estado: "En proceso",
+    prioridad: "Media",
+    fecha: "2026-09-04",
   },
   {
-    folio: "RIETI-ATZ-2026-000125",
-    municipio: "Atizapán de Zaragoza",
-    fecha: "03/09/2026",
-    tipo: "Posible explotación",
-    estado: "Canalizado",
+    folio: "RIETI-M3-2026-000125",
+    municipio: "Municipio 3",
+    estado: "Resuelto",
+    prioridad: "Baja",
+    fecha: "2026-09-03",
   },
   {
-    folio: "RIETI-ATZ-2026-000126",
-    municipio: "Atizapán de Zaragoza",
-    fecha: "02/09/2026",
-    tipo: "Trabajo infantil",
-    estado: "En revisión",
+    folio: "RIETI-M4-2026-000126",
+    municipio: "Municipio 4",
+    estado: "Pendiente",
+    prioridad: "Alta",
+    fecha: "2026-09-02",
   },
   {
-    folio: "RIETI-ATZ-2026-000127",
-    municipio: "Atizapán de Zaragoza",
-    fecha: "01/09/2026",
-    tipo: "Trabajo infantil",
-    estado: "En seguimiento",
+    folio: "RIETI-M5-2026-000127",
+    municipio: "Municipio 5",
+    estado: "En proceso",
+    prioridad: "Media",
+    fecha: "2026-09-01",
   },
 ];
 
 export default function Reportes() {
   const [municipio, setMunicipio] = useState("Todos");
   const [estado, setEstado] = useState("Todos");
+  const [prioridad, setPrioridad] = useState("Todos");
+  const [fecha, setFecha] = useState("");
 
   const filtrados = reportes.filter((reporte) => {
-    const municipioOk =
-      municipio === "Todos" || reporte.municipio === municipio;
-
-    const estadoOk =
-      estado === "Todos" || reporte.estado === estado;
-
-    return municipioOk && estadoOk;
+    return (
+      (municipio === "Todos" || reporte.municipio === municipio) &&
+      (estado === "Todos" || reporte.estado === estado) &&
+      (prioridad === "Todos" || reporte.prioridad === prioridad) &&
+      (!fecha || reporte.fecha === fecha)
+    );
   });
 
   return (
-    <div className="adminPage">
-      <div className="adminTopbar">
-        <div>
-          <span>RIETI · ADMINISTRACIÓN</span>
-          <h1>Bandeja de reportes</h1>
-        </div>
-      </div>
+    <section className="adminPage">
 
-      <div className="dashboardCards">
-        <article className="dashboardCard cardPurple">
-          <span>TOTAL DE REPORTES</span>
-          <strong>174</strong>
-          <small>Reportes registrados</small>
-        </article>
-
-        <article className="dashboardCard cardPink">
-          <span>EN REVISIÓN</span>
-          <strong>42</strong>
-          <small>Requieren atención</small>
-        </article>
-
-        <article className="dashboardCard cardBlue">
-          <span>EN SEGUIMIENTO</span>
-          <strong>28</strong>
-          <small>Casos canalizados</small>
-        </article>
-
-        <article className="dashboardCard cardTurquoise">
-          <span>CONCLUIDOS</span>
-          <strong>104</strong>
-          <small>Casos concluidos</small>
-        </article>
+      <div className="adminPageHeader">
+        <span>RIETI · ADMINISTRACIÓN</span>
+        <h1>Bandeja de reportes</h1>
       </div>
 
       <div className="dashboardPanel">
+
         <div className="panelHeader">
           <div>
             <span>CONSULTA</span>
-            <h2>Filtrar reportes</h2>
+            <h2>Filtros de búsqueda</h2>
           </div>
         </div>
 
         <div className="filters">
+
           <div>
             <label>Municipio</label>
+
             <select
               value={municipio}
               onChange={(e) => setMunicipio(e.target.value)}
             >
               <option>Todos</option>
-              <option>Atizapán de Zaragoza</option>
+
+              {municipios.map((item) => (
+                <option key={item}>{item}</option>
+              ))}
             </select>
           </div>
 
           <div>
             <label>Estado</label>
+
             <select
               value={estado}
               onChange={(e) => setEstado(e.target.value)}
             >
               <option>Todos</option>
-              <option>Registrado</option>
-              <option>En revisión</option>
-              <option>En seguimiento</option>
-              <option>Canalizado</option>
-              <option>Concluido</option>
-              <option>Archivado</option>
-              <option>Cancelado</option>
-              <option>Reincidente</option>
-            
+              <option>Pendiente</option>
+              <option>En proceso</option>
+              <option>Resuelto</option>
             </select>
           </div>
 
           <div>
-            <label>Periodo</label>
-            <select>
-              <option>Últimos 6 meses</option>
-              <option>Este mes</option>
-              <option>Últimos 30 días</option>
-              <option>Este año</option>
+            <label>Prioridad</label>
+
+            <select
+              value={prioridad}
+              onChange={(e) => setPrioridad(e.target.value)}
+            >
+              <option>Todos</option>
+              <option>Alta</option>
+              <option>Media</option>
+              <option>Baja</option>
             </select>
           </div>
+
+          <div>
+            <label>Fecha</label>
+
+            <input
+              type="date"
+              value={fecha}
+              onChange={(e) => setFecha(e.target.value)}
+            />
+          </div>
+
         </div>
+
       </div>
 
       <div className="dashboardPanel">
+
         <div className="panelHeader">
           <div>
             <span>REGISTROS</span>
-            <h2>Reportes recibidos</h2>
+            <h2>Reportes</h2>
           </div>
 
-          <small>{filtrados.length} resultados</small>
+          <small className="reportCount">
+            {filtrados.length} resultados
+          </small>
         </div>
 
         <div className="reportTable">
+
           <div className="reportRow reportHead">
             <span>Folio</span>
             <span>Municipio</span>
-            <span>Fecha</span>
-            <span>Tipo</span>
             <span>Estado</span>
-            <span></span>
+            <span>Prioridad</span>
+            <span>Fecha</span>
+            <span>Acciones</span>
           </div>
 
           {filtrados.map((reporte) => (
             <div className="reportRow" key={reporte.folio}>
+
               <strong>{reporte.folio}</strong>
+
               <span>{reporte.municipio}</span>
-              <span>{reporte.fecha}</span>
-              <span>{reporte.tipo}</span>
 
               <span>
                 <b
                   className={
-                    reporte.estado === "En revisión"
+                    reporte.estado === "Pendiente"
                       ? "statusReview"
-                      : reporte.estado === "En seguimiento"
+                      : reporte.estado === "En proceso"
                         ? "statusProcess"
                         : "statusDone"
                   }
@@ -181,11 +181,21 @@ export default function Reportes() {
                 </b>
               </span>
 
-              <button>Consultar</button>
+              <span>{reporte.prioridad}</span>
+
+              <span>{reporte.fecha}</span>
+
+              <button>
+                Consultar
+              </button>
+
             </div>
           ))}
+
         </div>
+
       </div>
-    </div>
+
+    </section>
   );
 }
