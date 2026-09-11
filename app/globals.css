@@ -2596,3 +2596,269 @@ a {
 }
 
 
+/* REPORTES EXPEDIENTE */
+.expedientePanel {
+  margin-top: 25px;
+}
+
+
+.expedienteGrid {
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(3,1fr);
+
+  gap:20px;
+
+}
+
+
+.expedienteGrid div {
+
+  padding:15px;
+
+  background:#faf9fc;
+
+  border-radius:14px;
+
+}
+
+
+.expedienteGrid small {
+
+  color:var(--rieti-turquoise);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:1px;
+
+}
+
+
+.expedienteGrid p {
+
+  margin-top:8px;
+
+  color:var(--text);
+
+  font-size:13px;
+
+  line-height:1.5;
+
+}
+
+
+.expedienteFull {
+
+  grid-column:1/-1;
+
+}
+
+
+@media(max-width:900px){
+
+.expedienteGrid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+/* MODAL EXPEDIENTE */
+
+.modalOverlay {
+
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(35,31,60,.45);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  z-index:300;
+
+  padding:30px;
+
+}
+
+
+
+.expedienteModal {
+
+  width:900px;
+
+  max-height:85vh;
+
+  overflow-y:auto;
+
+  background:white;
+
+  border-radius:22px;
+
+  padding:30px;
+
+  box-shadow:
+  0 20px 60px rgba(0,0,0,.25);
+
+}
+
+
+
+.modalHeader {
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  margin-bottom:25px;
+
+  border-bottom:1px solid #ebe9f0;
+
+  padding-bottom:20px;
+
+}
+
+
+
+.modalHeader span {
+
+  color:var(--rieti-turquoise);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:2px;
+
+}
+
+
+
+.modalHeader h2 {
+
+  margin-top:8px;
+
+  color:var(--rieti-purple);
+
+  font-size:22px;
+
+}
+
+
+
+.modalClose {
+
+  width:38px;
+
+  height:38px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:#f2eff7;
+
+  color:var(--rieti-purple);
+
+  font-size:24px;
+
+  cursor:pointer;
+
+}
+
+
+
+.modalClose:hover {
+
+  background:var(--rieti-purple);
+
+  color:white;
+
+}
+
+
+
+.expedienteGrid {
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(3,1fr);
+
+  gap:15px;
+
+}
+
+
+
+.expedienteGrid div {
+
+  background:#faf9fc;
+
+  padding:15px;
+
+  border-radius:14px;
+
+}
+
+
+
+.expedienteGrid small {
+
+  color:var(--rieti-turquoise);
+
+  font-size:10px;
+
+  font-weight:900;
+
+}
+
+
+
+.expedienteGrid p {
+
+  margin-top:8px;
+
+  color:#454252;
+
+  font-size:13px;
+
+}
+
+
+
+.expedienteFull {
+
+  grid-column:1/-1;
+
+}
+
+
+
+@media(max-width:900px){
+
+.expedienteModal{
+
+width:95%;
+
+}
+
+
+.expedienteGrid{
+
+grid-template-columns:1fr;
+
+}
+
+}

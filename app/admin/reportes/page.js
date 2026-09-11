@@ -8,13 +8,65 @@ const municipios = Array.from(
 );
 
 const reportes = [
-  {
+    {
     folio: "RIETI-M1-2026-000123",
     municipio: "Municipio 1",
     estado: "Pendiente",
     prioridad: "Alta",
     fecha: "2026-09-05",
+
+    detalle: {
+      geolocalizacion: "19.6018, -99.0507",
+
+      tipoActividad: "Trabajo peligroso",
+
+      menores: "2",
+
+      edad: "6 a 11 años",
+
+      genero: "Mixto",
+
+      horario: "14:30",
+
+      descripcion:
+        "Se observaron dos menores realizando actividades de venta en vía pública durante horario escolar.",
+
+      observaciones:
+        "El lugar se encuentra cerca de una zona comercial.",
+
+      calle: "Av. Principal",
+
+      colonia: "Centro",
+
+      referencias:
+        "Frente a un parque y cerca de una escuela.",
+
+      evidencia:
+        "1 fotografía referencial",
+
+      riesgo:
+        "Sí",
+
+      responsable:
+        "Sin asignar",
+
+      dependencia:
+        "Pendiente de canalización",
+
+      acciones:
+        "Reporte recibido. En espera de revisión inicial.",
+
+      seguimiento:
+        "2026-09-06",
+
+      resultado:
+        "Pendiente",
+
+      cierre:
+        "No cerrado"
+    }
   },
+
   {
     folio: "RIETI-M2-2026-000124",
     municipio: "Municipio 2",
@@ -50,6 +102,7 @@ export default function Reportes() {
   const [estado, setEstado] = useState("Todos");
   const [prioridad, setPrioridad] = useState("Todos");
   const [fecha, setFecha] = useState("");
+  const [reporteSeleccionado, setReporteSeleccionado] = useState(null);
 
   const filtrados = reportes.filter((reporte) => {
     return (
@@ -190,7 +243,10 @@ export default function Reportes() {
 
               <span>{reporte.fecha}</span>
 
-              <button>
+              <button
+                className="viewReport"
+                onClick={() => setReporteSeleccionado(reporte)}
+              >
                 Consultar
               </button>
 
@@ -198,6 +254,282 @@ export default function Reportes() {
           ))}
 
         </div>
+
+        {reporteSeleccionado && (
+  <div className="modalOverlay">
+
+    <div className="expedienteModal">
+
+
+      <div className="modalHeader">
+
+        <div>
+
+          <span>
+            EXPEDIENTE DIGITAL
+          </span>
+
+          <h2>
+            {reporteSeleccionado.folio}
+          </h2>
+
+        </div>
+
+
+        <button
+          className="modalClose"
+          onClick={() => setReporteSeleccionado(null)}
+        >
+          ×
+        </button>
+
+      </div>
+
+
+
+      <div className="expedienteGrid">
+
+
+        <div>
+          <small>
+            Fecha
+          </small>
+
+          <p>
+            {reporteSeleccionado.fecha}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            Municipio
+          </small>
+
+          <p>
+            {reporteSeleccionado.municipio}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            Estado
+          </small>
+
+          <p>
+            {reporteSeleccionado.estado}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            Geolocalización
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.geolocalizacion}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            Tipo de actividad
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.tipoActividad}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            NNA aproximados
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.menores}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            Edad
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.edad}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            Género
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.genero}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            Horario observado
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.horario}
+          </p>
+        </div>
+
+
+
+        <div className="expedienteFull">
+
+          <small>
+            Descripción
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.descripcion}
+          </p>
+
+        </div>
+
+
+
+        <div className="expedienteFull">
+
+          <small>
+            Observaciones adicionales
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.observaciones}
+          </p>
+
+        </div>
+
+
+
+        <div>
+          <small>
+            Riesgo
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.riesgo}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            Evidencias
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.evidencia}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            Responsable
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.responsable}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            Dependencia canalizada
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.dependencia}
+          </p>
+        </div>
+
+
+
+        <div className="expedienteFull">
+
+          <small>
+            Acciones realizadas
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.acciones}
+          </p>
+
+        </div>
+
+
+
+        <div>
+          <small>
+            Seguimiento
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.seguimiento}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            Resultado
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.resultado}
+          </p>
+        </div>
+
+
+
+        <div>
+          <small>
+            Cierre
+          </small>
+
+          <p>
+            {reporteSeleccionado.detalle.cierre}
+          </p>
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+)}
 
       </div>
 

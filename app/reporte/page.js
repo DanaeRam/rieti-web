@@ -23,7 +23,6 @@ export default function Reporte() {
   const [edades, setEdades] = useState("");
   const [genero, setGenero] = useState("");
   const [actividad, setActividad] = useState("");
-  const [dia, setDia] = useState("");
   const [hora, setHora] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [observaciones, setObservaciones] = useState("");
@@ -47,7 +46,6 @@ export default function Reporte() {
     edades &&
     genero &&
     actividad &&
-    dia &&
     hora &&
     descripcion;
 
@@ -324,14 +322,18 @@ export default function Reporte() {
                     Número de menores <em>*</em>
                   </label>
 
-                  <input
-                    type="number"
-                    min="1"
-                    value={numeroMenores}
+                  <select
+                    value={edades}
                     onChange={(e) => setNumeroMenores(e.target.value)}
-                    placeholder="Ej. 2"
                     required
-                  />
+                  >
+                    <option value="">Selecciona una opción</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5 o más</option>
+                  </select>
                 </div>
 
                 <div className="formField">
@@ -349,6 +351,7 @@ export default function Reporte() {
                     <option>6 a 11 años</option>
                     <option>12 a 14 años</option>
                     <option>15 a 17 años</option>
+                    <option>Mixto</option>
                     <option>No sé</option>
                   </select>
                 </div>
@@ -381,6 +384,7 @@ export default function Reporte() {
                     onChange={(e) => setActividad(e.target.value)}
                     required
                   >
+                    <option>Tipo de actividad</option>
                     <option>Venta de productos</option>
                     <option>Mendicidad forzada</option>
                     <option>Explotación sexual</option>
@@ -389,19 +393,6 @@ export default function Reporte() {
                     <option>Trabajo peligroso</option>
                     <option>Otra situación de explotación y/o vulneración</option>
                   </select>
-                </div>
-
-                <div className="formField">
-                  <label>
-                    Día en que se observó <em>*</em>
-                  </label>
-
-                  <input
-                    type="date"
-                    value={dia}
-                    onChange={(e) => setDia(e.target.value)}
-                    required
-                  />
                 </div>
 
                 <div className="formField timeFields">
@@ -747,11 +738,6 @@ export default function Reporte() {
                   <div>
                     <small>Actividad</small>
                     <p>{actividad}</p>
-                  </div>
-
-                  <div>
-                    <small>Día</small>
-                    <p>{dia}</p>
                   </div>
 
                   <div>
