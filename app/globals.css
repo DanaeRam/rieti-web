@@ -1083,6 +1083,127 @@ a {
   left: 70%;
 }
 
+.analyticsSummary {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.analyticsSummary > div {
+  min-width: 0;
+  padding: 22px 24px;
+  background: var(--white);
+  border: 1px solid #ebe9f0;
+  border-radius: 20px;
+  box-shadow: 0 7px 22px rgba(48,42,88,.05);
+}
+
+.analyticsSummary span {
+  display: block;
+  color: var(--rieti-turquoise);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.analyticsSummary strong {
+  display: block;
+  margin: 12px 0 4px;
+  color: var(--rieti-purple);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.analyticsSummary small {
+  color: #85818f;
+  font-size: 10px;
+}
+
+.analyticsDescription {
+  margin: -8px 0 18px;
+  color: #6e6c79;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* MAPA DE CALOR */
+.heatMapContainer {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.heatMapContainer .leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #e5e5e5;
+}
+
+.rietiHeatPoint {
+  background: transparent;
+  border: none;
+}
+
+.rietiHeatCircle {
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.heatMapContainer .leaflet-control-zoom {
+  margin-left: 12px;
+  margin-top: 12px;
+}
+
+.heatMapContainer .leaflet-control-attribution {
+  font-size: 9px;
+}
+
+
+.analyticsGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 22px;
+  margin-bottom: 22px;
+}
+
+.analyticsGrid .dashboardPanel {
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.analyticsGrid .chart {
+  min-width: 0;
+  width: 100%;
+}
+
+
+
+@media (max-width: 1100px) {
+
+  .analyticsSummary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .analyticsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 750px) {
+
+  .analyticsSummary {
+    grid-template-columns: 1fr;
+  }
+
+  .analyticsHeatMap {
+    height: 350px;
+  }
+}
+
 /* ADMIN DE ACCESOS */
 
 .userForm {

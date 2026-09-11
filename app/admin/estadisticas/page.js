@@ -1,9 +1,59 @@
+"use client";
+
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
+
+import HeatMap from "@/components/HeatMap";
+
 const municipios = [
-  ["Municipio 1", 108],
-  ["Municipio 2", 92],
-  ["Municipio 3", 74],
-  ["Municipio 4", 61],
-  ["Municipio 5", 53],
+  { municipio: "Municipio 1", reportes: 108 },
+  { municipio: "Municipio 2", reportes: 92 },
+  { municipio: "Municipio 3", reportes: 74 },
+  { municipio: "Municipio 4", reportes: 61 },
+  { municipio: "Municipio 5", reportes: 53 },
+  { municipio: "Municipio 6", reportes: 48 },
+  { municipio: "Municipio 7", reportes: 41 },
+  { municipio: "Municipio 8", reportes: 37 },
+];
+
+const reportesMensuales = [
+  { mes: "Ene", reportes: 35 },
+  { mes: "Feb", reportes: 48 },
+  { mes: "Mar", reportes: 42 },
+  { mes: "Abr", reportes: 57 },
+  { mes: "May", reportes: 74 },
+  { mes: "Jun", reportes: 72 },
+];
+
+const estados = [
+  { nombre: "Pendientes", valor: 62 },
+  { nombre: "En seguimiento", valor: 91 },
+  { nombre: "Concluidos", valor: 275 },
+];
+
+const prioridades = [
+  { prioridad: "Alta", reportes: 62 },
+  { prioridad: "Media", reportes: 151 },
+  { prioridad: "Baja", reportes: 215 },
+];
+
+const coloresEstado = [
+  "#D16C9A",
+  "#496A9F",
+  "#55AFC1",
 ];
 
 export default function Estadisticas() {
@@ -43,6 +93,34 @@ export default function Estadisticas() {
 
       </div>
 
+      <div className="analyticsSummary">
+
+        <div>
+          <span>COBERTURA MUNICIPAL</span>
+          <strong>75%</strong>
+          <small>12 de 16 municipios</small>
+        </div>
+
+        <div>
+          <span>CASOS CONCLUIDOS</span>
+          <strong>64.3%</strong>
+          <small>275 de 428 reportes</small>
+        </div>
+
+        <div>
+          <span>PRIORIDAD ALTA</span>
+          <strong>14.5%</strong>
+          <small>62 reportes</small>
+        </div>
+
+        <div>
+          <span>PROMEDIO DIARIO</span>
+          <strong>2.4</strong>
+          <small>Reportes registrados</small>
+        </div>
+
+      </div>
+
       <div className="dashboardPanel">
 
         <div className="panelHeader">
@@ -55,15 +133,18 @@ export default function Estadisticas() {
             <option>Todos los municipios</option>
             <option>Municipio 1</option>
             <option>Municipio 2</option>
+            <option>Municipio 3</option>
           </select>
         </div>
 
-        <div className="heatMap">
-          <div className="heatPoint point1" />
-          <div className="heatPoint point2" />
-          <div className="heatPoint point3" />
-          <div className="heatPoint point4" />
-          <div className="heatPoint point5" />
+        <p className="analyticsDescription">
+          El mapa muestra las zonas con mayor concentración de reportes
+          registrados. Las áreas de mayor intensidad representan una
+          concentración más alta de casos.
+        </p>
+
+        <div className="analyticsHeatMap">
+          <HeatMap />
         </div>
 
       </div>
@@ -79,14 +160,125 @@ export default function Estadisticas() {
             </div>
           </div>
 
-          <div className="analyticsList">
+          <div className="chart">
+            <ResponsiveContainer width="100%" height={320}>
+              <BarChart data={municipios}>
 
-            {municipios.map(([municipio, cantidad]) => (
-              <div key={municipio}>
-                <span>{municipio}</span>
-                <strong>{cantidad}</strong>
-              </div>
-            ))}
+                <CartesianGrid stroke="#ebe9f0" />
+
+                <XAxis
+                  dataKey="municipio"
+                  tick={{ fontSize: 10 }}
+                  angle={-25}
+                  textAnchor="end"
+                  height={60}
+                />
+
+                <YAxis />
+
+                <Tooltip />
+
+                <Bar
+                  dataKey="reportes"
+                  fill="#496A9F"
+                  radius={[7, 7, 0, 0]}
+                />
+
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+        </div>
+
+        <div className="dashboardPanel">
+
+          <div className="panelHeader">
+            <div>
+              <span>ESTADOS</span>
+              <h2>Distribución de reportes</h2>
+            </div>
+          </div>
+
+          <div className="chart">
+
+            <ResponsiveContainer width="100%" height={320}>
+              <PieChart>
+
+                <Pie
+                  data={estados}
+                  dataKey="valor"
+                  nameKey="nombre"
+                  cx="50%"
+                  cy="45%"
+                  innerRadius={65}
+                  outerRadius={105}
+                  paddingAngle={3}
+                >
+
+                  {estados.map((estado, index) => (
+                    <Cell
+                      key={estado.nombre}
+                      fill={coloresEstado[index]}
+                    />
+                  ))}
+
+                </Pie>
+
+                <Tooltip />
+
+                <Legend
+                  verticalAlign="bottom"
+                  height={45}
+                />
+
+              </PieChart>
+            </ResponsiveContainer>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="analyticsGrid">
+
+        <div className="dashboardPanel">
+
+          <div className="panelHeader">
+            <div>
+              <span>EVOLUCIÓN</span>
+              <h2>Reportes recibidos por mes</h2>
+            </div>
+          </div>
+
+          <div className="chart">
+
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={reportesMensuales}>
+
+                <CartesianGrid stroke="#ebe9f0" />
+
+                <XAxis dataKey="mes" />
+
+                <YAxis />
+
+                <Tooltip />
+
+                <Line
+                  type="monotone"
+                  dataKey="reportes"
+                  stroke="#3E3869"
+                  strokeWidth={3}
+                  dot={{
+                    r: 5,
+                    fill: "#ffffff",
+                    stroke: "#3E3869",
+                    strokeWidth: 3,
+                  }}
+                />
+
+              </LineChart>
+            </ResponsiveContainer>
 
           </div>
 
@@ -96,26 +288,33 @@ export default function Estadisticas() {
 
           <div className="panelHeader">
             <div>
-              <span>ESTADO</span>
-              <h2>Reportes por estado</h2>
+              <span>PRIORIDAD</span>
+              <h2>Reportes por prioridad</h2>
             </div>
           </div>
 
-          <div className="analyticsList">
-            <div>
-              <span>Pendientes</span>
-              <strong>62</strong>
-            </div>
+          <div className="chart">
 
-            <div>
-              <span>En proceso</span>
-              <strong>91</strong>
-            </div>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={prioridades}>
 
-            <div>
-              <span>Resueltos</span>
-              <strong>275</strong>
-            </div>
+                <CartesianGrid stroke="#ebe9f0" />
+
+                <XAxis dataKey="prioridad" />
+
+                <YAxis />
+
+                <Tooltip />
+
+                <Bar
+                  dataKey="reportes"
+                  fill="#D16C9A"
+                  radius={[7, 7, 0, 0]}
+                />
+
+              </BarChart>
+            </ResponsiveContainer>
+
           </div>
 
         </div>
