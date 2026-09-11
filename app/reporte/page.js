@@ -28,6 +28,7 @@ export default function Reporte() {
   const [observaciones, setObservaciones] = useState("");
 
   const [municipio, setMunicipio] = useState("");
+  const [otroMunicipio, setOtroMunicipio] = useState("");
   const [calle, setCalle] = useState("");
   const [colonia, setColonia] = useState("");
   const [referencias, setReferencias] = useState("");
@@ -50,32 +51,50 @@ export default function Reporte() {
     descripcion;
 
   const paso3Completo =
-    municipio &&
-    calle &&
-    colonia &&
-    referencias &&
-    ubicacion;
+  municipio.trim() !== "" &&
+  (municipio !== "Otro" || otroMunicipio.trim() !== "") &&
+  calle.trim() !== "" &&
+  colonia.trim() !== "" &&
+  referencias.trim() !== "" &&
+  position !== null;
 
   const paso4Completo = riesgo;
 
   function obtenerUbicacion() {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        setPosition([
-          pos.coords.latitude,
-          pos.coords.longitude
-        ]);
-      },
-      () => {
-        alert("No se pudo obtener tu ubicación.");
-      }
-    );
-  }
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+
+      const nuevaPosicion = [
+        pos.coords.latitude,
+        pos.coords.longitude
+      ];
+
+      setPosition(nuevaPosicion);
+
+      setUbicacion(
+        `${pos.coords.latitude}, ${pos.coords.longitude}`
+      );
+
+      setUbicacionManual(false);
+
+    },
+    () => {
+      alert("No se pudo obtener tu ubicación.");
+    }
+  );
+
+}
 
   function seleccionarUbicacionManual() {
-    setUbicacion("Ubicación seleccionada manualmente");
-    setUbicacionManual(true);
-  }
+
+  setUbicacion(
+    "Ubicación seleccionada manualmente"
+  );
+
+  setUbicacionManual(true);
+
+}
 
   function manejarArchivos(event) {
     const seleccionados = Array.from(event.target.files);
@@ -323,7 +342,7 @@ export default function Reporte() {
                   </label>
 
                   <select
-                    value={edades}
+                    value={numeroMenores}
                     onChange={(e) => setNumeroMenores(e.target.value)}
                     required
                   >
@@ -500,11 +519,45 @@ export default function Reporte() {
                     required
                   >
                     <option value="">Selecciona un municipio</option>
-                    <option>Atizapán de Zaragoza</option>
-                    <option>Naucalpan</option>
-                    <option>Tlalnepantla</option>
-                    <option>Cuautitlán Izcalli</option>
+                    <option>Municipio 1</option>
+                    <option>Municipio 2</option>
+                    <option>Municipio 3</option>
+                    <option>Municipio 4</option>
+                    <option>Municipio 5</option>
+                    <option>Municipio 6</option>
+                    <option>Municipio 7</option>
+                    <option>Municipio 8</option>
+                    <option>Municipio 9</option>
+                    <option>Municipio 10</option>
+                    <option>Municipio 11</option>
+                    <option>Municipio 12</option>
+                    <option>Municipio 13</option>
+                    <option>Municipio 14</option>
+                    <option>Municipio 15</option>
+                    <option>Municipio 16</option>
+                    <option>Otro</option>
                   </select>
+
+                  {municipio === "Otro" && (
+
+                    <div className="formField">
+
+                      <label>
+                        Especifica el municipio <em>*</em>
+                      </label>
+
+                      <input
+                        type="text"
+                        value={otroMunicipio}
+                        onChange={(e) => setOtroMunicipio(e.target.value)}
+                        placeholder="Escribe el nombre del municipio"
+                        required
+                      />
+
+                    </div>
+
+                  )}
+
                 </div>
 
                 <div className="formField">
@@ -768,7 +821,11 @@ export default function Reporte() {
 
                   <div>
                     <small>Municipio</small>
-                    <p>{municipio}</p>
+                    <p>
+                    {municipio === "Otro"
+                      ? otroMunicipio
+                      : municipio}
+                    </p>
                   </div>
 
                   <div>
