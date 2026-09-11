@@ -102,9 +102,14 @@ export default function Reportes() {
               onChange={(e) => setEstado(e.target.value)}
             >
               <option>Todos</option>
-              <option>Pendiente</option>
-              <option>En proceso</option>
-              <option>Resuelto</option>
+              <option>Registrado</option>
+              <option>En revisión</option>
+              <option>En seguimiento</option>
+              <option>Canalizado</option>
+              <option>Concluido</option>
+              <option>Archivado</option>
+              <option>Cancelado</option>
+              <option>Reincidente</option>
             </select>
           </div>
 

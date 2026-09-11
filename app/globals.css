@@ -724,9 +724,100 @@ a {
   font-size: 11px;
 }
 
-/* =========================
-   PANELES
-========================= */
+/*    GRÁFICAS DEL DASHBOARD */
+
+.dashboardChartLarge {
+  width: 100%;
+}
+
+.dashboardGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 22px;
+  margin-bottom: 22px;
+}
+
+.dashboardGrid .dashboardPanel {
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.chart {
+  width: 100%;
+  min-width: 0;
+}
+
+.pieChartContainer {
+  width: 100%;
+  min-width: 0;
+}
+
+/* */
+
+.dashboardMiniCards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-bottom: 22px;
+}
+
+.miniCard {
+  min-width: 0;
+  min-height: 125px;
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid #ebe9f0;
+  border-radius: 20px;
+  box-shadow: 0 7px 22px rgba(48,42,88,.05);
+}
+
+.miniCard span {
+  display: block;
+  color: var(--rieti-purple);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.miniCard strong {
+  display: block;
+  margin: 15px 0 5px;
+  color: var(--rieti-purple);
+  font-size: 32px;
+}
+
+.miniCard small {
+  color: #85818f;
+  font-size: 11px;
+}
+
+/*  */
+
+@media (max-width: 1100px) {
+
+  .dashboardGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboardMiniCards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 750px) {
+
+  .dashboardMiniCards {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboardGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*  */
 
 .dashboardPanel {
   width: 100%;
@@ -821,9 +912,7 @@ a {
   border-color: var(--rieti-purple-light);
 }
 
-/* =========================
-   TABLAS
-========================= */
+/*  */
 
 .reportTable {
   width: 100%;
